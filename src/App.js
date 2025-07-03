@@ -25,6 +25,7 @@ import Kenjal from './kenjal.jpeg';
 import Fatima from './fatima.jpg';
 import Liam from './laim.jpeg';
 import david from './david.jpeg';
+import TechnicalSkills from './TechnicalSkills';
 
 import portfolio1 from './portfolio1.png'
 import portfolio2 from './portfolio2.png'
@@ -343,6 +344,29 @@ function App() {
         </div>
       </section>
 
+
+
+
+
+  {/* --- About Section Starts Here --- */}
+  <section id="about" className="about-section py-5">
+    {/* ... aapke about section ka poora code ... */}
+  </section>
+  {/* --- About Section Ends Here --- */}
+
+
+  {/* ====> YAHAN APNA NAYA TECHNICAL SKILLS COMPONENT ADD KAREIN <==== */}
+  <TechnicalSkills />
+
+
+  {/* --- Services Section Starts Here --- */}
+  <section className="services-section py-5" id="services">
+    {/* ... aapke services section ka poora code ... */}
+  </section>
+
+
+
+
       <SkillMarquee />
 
       <section className="services-section py-5" id="services">
@@ -623,10 +647,11 @@ function App() {
                   </div>
                 </a>
               </div>
-            </div>
+            </div> 
           </div>
         </div>
       </section>
+
 
       <section id="contact" className="contact-section py-5">
         <div className="container">

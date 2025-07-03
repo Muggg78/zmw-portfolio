@@ -523,9 +523,6 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 
 
 
-
-
-
 /* src/App.css (ye code file ke aakhir mein daalein) */
 
 /* === Technical Skills Section Styles === */
@@ -588,6 +585,10 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 .dark-mode .skill-card-tech .tech-name {
   color: #e0e0e0;
 }
+
+
+
+
 
 
 

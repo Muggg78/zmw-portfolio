@@ -596,7 +596,7 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 /* Skills Marquee Section */
 .skills-marquee-section { background-color: #fff; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
 .marquee-container { overflow: hidden; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
-.marquee-content { display: flex; white-space: nowrap; will-change: transform; animation: scroll-left 40s linear infinite; }
+.marquee-content { display: flex; white-space: nowrap; will-change: transform; animation: scroll-left 25s linear infinite; }
 .marquee-container:hover .marquee-content { animation-play-state: paused; }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 1.1rem; font-weight: 500; color: #495057; flex-shrink: 0; }

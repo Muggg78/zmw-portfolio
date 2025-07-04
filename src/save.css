@@ -1,3 +1,5 @@
+
+
 :root {
   --primary-color: #d9843a;
   --primary-dark: #c2702a;
@@ -198,14 +200,14 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 450px;
 }
 
-/* ===> CHANGE #1 STARTS HERE <=== */
+
+
 .blob {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%; /* Changed from 90vw to 100% to prevent overflow */
-  height: 0;
-  padding-bottom: 100%; /* Keeps the element square */
+  width: 90vw;               /* Responsive and no overflow */
+  height: 90vw;              /* Height same as width for perfect circle */
   max-width: 500px;
   max-height: 500px;
   background: linear-gradient(135deg, #fca55e, #ff8c42);
@@ -214,7 +216,10 @@ h1, h2, h3, h4, h5, h6 {
   transform: translate(-50%, -50%);
   overflow: hidden;
 }
-/* ===> CHANGE #1 ENDS HERE <=== */
+
+
+
+
 
 @keyframes morph {
   0%,
@@ -239,16 +244,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- General Section Label --- */
-/* ===> CHANGE #2 STARTS HERE <=== */
 .section-label {
   color: var(--primary-color);
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
-  padding-left: 15px; /* Changed from margin-left to padding-left */
-  padding-right: 15px; /* Added for safety */
+  margin-left: 27px;
 }
-/* ===> CHANGE #2 ENDS HERE <=== */
 
 .vnm {
   color: var(--primary-color);
@@ -497,12 +499,6 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
   .experience-badge .years { font-size: 2.8rem !important; }
   .signature-image { margin-left: auto; margin-right: auto; }
   .skills-wrapper { max-width: 500px; margin-left: auto; margin-right: auto; text-align: left; }
-  /* ===> CHANGE #2 (Mobile Part) STARTS HERE <=== */
-  .section-label {
-    padding-left: 0; /* Removing extra padding on mobile */
-    padding-right: 0;
-  }
-  /* ===> CHANGE #2 (Mobile Part) ENDS HERE <=== */
 }
 
 @media (max-width: 767.98px) {

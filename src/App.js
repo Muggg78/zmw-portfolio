@@ -324,7 +324,7 @@ function App() {
                         <img src={aboutImage} alt="About Zohaib Mughal" className="img-fluid rounded shadow-sm about-profile-image"/>
                         <div className="experience-badge">
                             <div className="badge-circle d-flex flex-column justify-content-center align-items-center">
-                                <span className="years">7</span>
+                                <span className="years">5</span>
                                 <span className="badge-text text-uppercase">Years of Best and<br/>Successful Work<br/>Experience</span>
                             </div>
                         </div>
@@ -335,7 +335,7 @@ function App() {
                         Full Stack Developer based In Pakistan
                     </h3>
                     <p className="text-muted mb-4 lh-lg">
-                        I am passionate Senior Designer, and I'm very passionate and dedicated to my work. With 7 years experience as a professional Web developer, I have acquired the skills and knowledge necessary to make your project a success.
+                        I am passionate Senior Designer, and I'm very passionate and dedicated to my work. With 5 years experience as a professional Web developer, I have acquired the skills and knowledge necessary to make your project a success.
                     </p>
                     <img src={signatureImage} alt="Zohaib Mughal Signature" className="signature-image img-fluid mb-4"/>
                     <a href="#your-cv-link" className="btn btn-download-cv fw-medium px-4 py-2" download>Download CV</a>
@@ -376,7 +376,7 @@ function App() {
                       <p className="services-label text-uppercase fw-bold mb-2">Services</p>
                       <h2 className="fw-bold mb-4">I offer a Full-cycle of Web<br />Development Services</h2>
                       <p className="text-muted mb-5">
-                          For more than 7 years our experts have been accomplishing enough with modern Web Development, new generation programming language, and Full Stack developers to deliver cost-effective solutions.
+                          For more than 5 years our experts have been accomplishing enough with modern Web Development, new generation programming language, and Full Stack developers to deliver cost-effective solutions.
                       </p>
                       <div className="skills-wrapper" ref={skillsWrapperRef}>
                           <div className="skill-item mb-4">
@@ -664,7 +664,7 @@ function App() {
           <div className="row g-4 g-lg-5 justify-content-center mb-5">
             <div className="col-md-6 col-lg-4 d-flex" data-aos="fade-up" data-aos-delay="100"><div className="contact-item-icon flex-shrink-0 me-3"><i className="bi bi-geo-alt"></i></div><div className="contact-item-text"><h5 className="contact-item-label fw-bold mb-1">Location</h5><p className="contact-item-detail text-muted mb-0">Okara Punjab, Pakistan</p></div></div>
             <div className="col-md-6 col-lg-4 d-flex" data-aos="fade-up" data-aos-delay="200"><div className="contact-item-icon flex-shrink-0 me-3"><i className="bi bi-telephone"></i></div><div className="contact-item-text"><h5 className="contact-item-label fw-bold mb-1">Phone</h5><a href="tel:+923440740774" className="contact-item-detail text-muted text-decoration-none mb-0">+92 344 074 0774</a></div></div>
-            <div className="col-md-6 col-lg-4 d-flex" data-aos="fade-up" data-aos-delay="300"><div className="contact-item-icon flex-shrink-0 me-3"><i className="bi bi-envelope"></i></div><div className="contact-item-text"><h5 className="contact-item-label fw-bold mb-1">Mail</h5><a href="mailto:zmwwebdevelopment@gmail.com" className="contact-item-detail text-muted text-decoration-none mb-0">zmwwebdevelopment@gmail.com</a></div></div>
+            <div className="col-md-6 col-lg-4 d-flex" data-aos="fade-up" data-aos-delay="300"><div className="contact-item-icon flex-shrink-0 me-3"><i className="bi bi-envelope"></i></div><div className="contact-item-text"><h5 className="contact-item-label fw-bold mb-1">Mail</h5><a href="mailto:zmwofficial1@gmail.com" className="contact-item-detail text-muted text-decoration-none mb-0">zmwofficial1@gmail.com</a></div></div>
           </div>
           <div className="row g-5">
             <div className="col-lg-7" data-aos="fade-right">
@@ -704,11 +704,11 @@ function App() {
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
                   <div className="text-center text-md-start mb-3 mb-md-0"><small className="copyright-text">Copyright © 2025. All rights with ZMW</small></div>
                   <div className="social-icons text-center text-md-end">
-                      <a href="/" aria-label="Facebook" className="social-icon-link me-3"><i className="bi bi-facebook"></i></a>
-                      <a href="/" aria-label="Twitter" className="social-icon-link me-3"><i className="bi bi-twitter"></i></a>
-                      <a href="/" aria-label="Instagram" className="social-icon-link me-3"><i className="bi bi-instagram"></i></a>
-                      <a href="/" aria-label="Dribbble" className="social-icon-link me-3"><i className="bi bi-dribbble"></i></a>
-                      <a href="/" aria-label="TikTok" className="social-icon-link"><i className="bi bi-tiktok"></i></a>
+                      <a href="https://www.facebook.com/share/16oZJyzmho/" aria-label="Facebook" className="social-icon-link me-3"><i className="bi bi-facebook"></i></a>
+                      <a href="https://www.linkedin.com/in/zohaibmughal74" aria-label="Linkedin" className="social-icon-link me-3"><i className="bi bi-linkedin"></i></a>
+                      <a href="https://www.instagram.com/zmw_web_developer?igsh=b24zbjdnOTc2bHky" aria-label="Instagram" className="social-icon-link me-3"><i className="bi bi-instagram"></i></a>
+                      
+                      <a href="https://www.tiktok.com/@zmw_web_developer?_t=ZS-8xiX8R2Ymff&_r=1" aria-label="TikTok" className="social-icon-link"><i className="bi bi-tiktok"></i></a>
                   </div>
               </div>
           </div>

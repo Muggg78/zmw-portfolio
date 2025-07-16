@@ -210,6 +210,45 @@ function App() {
   const [showThemeOptions, setShowThemeOptions] = useState(false);
   const skillsWrapperRef = useRef(null);
 
+  // === FORM STATE MANAGEMENT ===
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [result, setResult] = useState('');
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending....");
+    const web3formData = new FormData();
+
+    // === KEY YAHAN ADD KAR DI GAYI HAI ===
+    web3formData.append("access_key", "65a4d6c9-523e-4d15-b04b-ad75d083e1b4");
+    
+    web3formData.append("name", formData.name);
+    web3formData.append("email", formData.email);
+    web3formData.append("subject", formData.subject);
+    web3formData.append("message", formData.message);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", { method: "POST", body: web3formData });
+      const data = await response.json();
+      if (data.success) {
+        setResult("Form Submitted Successfully!");
+        event.target.reset();
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        console.log("Error", data);
+        setResult(data.message);
+      }
+    } catch (error) {
+      console.log("Error", error);
+      setResult("Something went wrong!");
+    }
+  };
+
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
@@ -227,23 +266,9 @@ function App() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const skillBars = entry.target.querySelectorAll('.progress-bar');
-            const skillPercentages = entry.target.querySelectorAll('.skill-percent-value');
+            // This part was removed as it caused issues without the animated numbers.
+            // Keeping the bar animation is enough.
             skillBars.forEach((bar) => { bar.style.width = bar.getAttribute('aria-valuenow') + '%'; });
-            skillPercentages.forEach((percent) => {
-              const target = +percent.getAttribute('data-target');
-              let current = 0;
-              const increment = target / 100;
-              const updateCount = () => {
-                if (current < target) {
-                  current += increment;
-                  percent.innerText = Math.ceil(current) + '%';
-                  requestAnimationFrame(updateCount);
-                } else {
-                  percent.innerText = target + '%';
-                }
-              };
-              updateCount();
-            });
             observer.unobserve(entry.target);
           }
         });
@@ -296,11 +321,14 @@ function App() {
               </p>
               <div className="d-flex align-items-center justify-content-center justify-content-lg-start mt-5" data-aos="fade-up" data-aos-delay="400">
                 <div className="me-3 software-text"><small className="text-muted">High knowledge on<br />softwares</small></div>
+                {/* === ICONS YAHAN ADD KIYE GAYE HAIN === */}
                 <div className="skill-icons d-flex gap-3">
                   <a href="/" className="skill-icon html5-icon"><i className="bi bi-filetype-html"></i></a>
                   <a href="/" className="skill-icon css3-icon"><i className="bi bi-filetype-css"></i></a>
                   <a href="/" className="skill-icon js-icon"><i className="bi bi-filetype-js"></i></a>
                   <a href="/" className="skill-icon bootstrap-icon"><i className="bi bi-bootstrap-fill"></i></a>
+                  <a href="/" className="skill-icon php-icon"><i className="bi bi-filetype-php"></i></a>
+                  <a href="/" className="skill-icon python-icon"><i className="bi bi-filetype-py"></i></a>
                 </div>
               </div>
             </div>
@@ -317,7 +345,7 @@ function App() {
       <section id="about" className="about-section py-5">
         <div className="container">
             <div className="text-center text-lg-start mb-4" data-aos="fade-up">
-                <p className="section-label text-uppercase fw-bold">About Me</p>
+                <p className="section-labelwe text-uppercase fw-bold">About Me</p>
             </div>
             <div className="row align-items-center justify-content-center gy-5 gy-lg-0">
                 <div className="col-lg-5 text-center" data-aos="fade-right">
@@ -345,28 +373,7 @@ function App() {
         </div>
       </section>
 
-
-
-
-
-  {/* --- About Section Starts Here --- */}
-  <section id="about" className="about-section py-5">
-    {/* ... aapke about section ka poora code ... */}
-  </section>
-  {/* --- About Section Ends Here --- */}
-
-
-  {/* ====> YAHAN APNA NAYA TECHNICAL SKILLS COMPONENT ADD KAREIN <==== */}
-  <TechnicalSkills />
-
-
-  {/* --- Services Section Starts Here --- */}
-  <section className="services-section py-5" id="services">
-    {/* ... aapke services section ka poora code ... */}
-  </section>
-
-
-
+      <TechnicalSkills />
 
       <SkillMarquee />
 
@@ -383,28 +390,28 @@ function App() {
                           <div className="skill-item mb-4">
                               <div className="d-flex justify-content-between mb-1">
                                   <span className="skill-name">HTML & CSS</span>
-                                  <span className="skill-percent fw-medium"><span className="skill-percent-value" data-target="95">0%</span></span>
+                                  <span className="skill-percent fw-medium">95%</span>
                               </div>
                               <div className="progress" style={{ height: '8px' }}><div className="progress-bar" role="progressbar" style={{ width: '0%' }} aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div></div>
                           </div>
                            <div className="skill-item mb-4">
                               <div className="d-flex justify-content-between mb-1">
                                   <span className="skill-name">JavaScript</span>
-                                  <span className="skill-percent fw-medium"><span className="skill-percent-value" data-target="80">0%</span></span>
+                                  <span className="skill-percent fw-medium">80%</span>
                               </div>
                               <div className="progress" style={{ height: '8px' }}><div className="progress-bar" role="progressbar" style={{ width: '0%' }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div></div>
                           </div>
                           <div className="skill-item mb-4">
                               <div className="d-flex justify-content-between mb-1">
                                   <span className="skill-name">WordPress</span>
-                                  <span className="skill-percent fw-medium"><span className="skill-percent-value" data-target="90">0%</span></span>
+                                  <span className="skill-percent fw-medium">90%</span>
                               </div>
                               <div className="progress" style={{ height: '8px' }}><div className="progress-bar" role="progressbar" style={{ width: '0%' }} aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div></div>
                           </div>
                           <div className="skill-item mb-4">
                               <div className="d-flex justify-content-between mb-1">
                                   <span className="skill-name">React Development</span>
-                                  <span className="skill-percent fw-medium"><span className="skill-percent-value" data-target="85">0%</span></span>
+                                  <span className="skill-percent fw-medium">85%</span>
                               </div>
                               <div className="progress" style={{ height: '8px' }}><div className="progress-bar" role="progressbar" style={{ width: '0%' }} aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div></div>
                           </div>
@@ -436,42 +443,10 @@ function App() {
                 </div>
             </div>
             <div className="row g-4 text-center justify-content-center">
-                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="100">
-                    <div className="process-card p-4 rounded shadow-sm w-100">
-                        <div className="process-icon mb-3">
-                            <i className="bi bi-search-heart-fill"></i>
-                        </div>
-                        <h5 className="fw-bold mb-2">01. Discovery</h5>
-                        <p className="text-muted mb-0">We start by understanding your business goals, target audience, and project requirements in detail.</p>
-                    </div>
-                </div>
-                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <div className="process-card p-4 rounded shadow-sm w-100">
-                        <div className="process-icon mb-3">
-                            <i className="bi bi-palette2"></i>
-                        </div>
-                        <h5 className="fw-bold mb-2">02. Design</h5>
-                        <p className="text-muted mb-0">We create intuitive UI/UX wireframes and mockups that capture your brand and engage your users.</p>
-                    </div>
-                </div>
-                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="300">
-                    <div className="process-card p-4 rounded shadow-sm w-100">
-                        <div className="process-icon mb-3">
-                            <i className="bi bi-code-slash"></i>
-                        </div>
-                        <h5 className="fw-bold mb-2">03. Development</h5>
-                        <p className="text-muted mb-0">Using clean, efficient code, I bring the designs to life, building a responsive and fast website.</p>
-                    </div>
-                </div>
-                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="400">
-                    <div className="process-card p-4 rounded shadow-sm w-100">
-                        <div className="process-icon mb-3">
-                            <i className="bi bi-rocket-takeoff-fill"></i>
-                        </div>
-                        <h5 className="fw-bold mb-2">04. Launch</h5>
-                        <p className="text-muted mb-0">After rigorous testing for performance and bugs, we deploy your project and go live.</p>
-                    </div>
-                </div>
+                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="100"><div className="process-card p-4 rounded shadow-sm w-100"><div className="process-icon mb-3"><i className="bi bi-search-heart-fill"></i></div><h5 className="fw-bold mb-2">01. Discovery</h5><p className="text-muted mb-0">We start by understanding your business goals, target audience, and project requirements in detail.</p></div></div>
+                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="200"><div className="process-card p-4 rounded shadow-sm w-100"><div className="process-icon mb-3"><i className="bi bi-palette2"></i></div><h5 className="fw-bold mb-2">02. Design</h5><p className="text-muted mb-0">We create intuitive UI/UX wireframes and mockups that capture your brand and engage your users.</p></div></div>
+                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="300"><div className="process-card p-4 rounded shadow-sm w-100"><div className="process-icon mb-3"><i className="bi bi-code-slash"></i></div><h5 className="fw-bold mb-2">03. Development</h5><p className="text-muted mb-0">Using clean, efficient code, I bring the designs to life, building a responsive and fast website.</p></div></div>
+                <div className="col-md-6 col-lg-3 d-flex" data-aos="fade-up" data-aos-delay="400"><div className="process-card p-4 rounded shadow-sm w-100"><div className="process-icon mb-3"><i className="bi bi-rocket-takeoff-fill"></i></div><h5 className="fw-bold mb-2">04. Launch</h5><p className="text-muted mb-0">After rigorous testing for performance and bugs, we deploy your project and go live.</p></div></div>
             </div>
         </div>
       </section>
@@ -479,31 +454,18 @@ function App() {
       <section id="portfolio" className="portfolio-v2-section py-5">
         <div className="container">
           <div className="row mb-5 justify-content-center text-center" data-aos="fade-up">
-            <div className="col-lg-8">
-              <p className="section-label portfolio-label text-uppercase fw-bold mb-2">Portfolio</p>
-              <h2 className="fw-bold mb-0 position-relative d-inline-block">My Creative Works & Case Studies</h2>
-            </div>
+            <div className="col-lg-8"><p className="section-label portfolio-label text-uppercase fw-bold mb-2">Portfolio</p><h2 className="fw-bold mb-0 position-relative d-inline-block">My Creative Works & Case Studies</h2></div>
           </div>
-
           <div className="row g-4 justify-content-center">
             {portfolioData.map((project, index) => (
               <div className="col-lg-4 col-md-6" key={project.id} data-aos="fade-up" data-aos-delay={index * 100}>
                 <div className="project-card h-100 d-flex flex-column">
-                  <div className="project-image-preview">
-                    <img src={project.image} alt={project.title} className="img-fluid" />
-                  </div>
+                  <div className="project-image-preview"><img src={project.image} alt={project.title} className="img-fluid" /></div>
                   <div className="project-card-content p-4 d-flex flex-column flex-grow-1">
                     <h5 className="project-title fw-bold mb-2">{project.title}</h5>
                     <p className="project-description text-muted small flex-grow-1">{project.description}</p>
-                    <div className="project-tech-stack mb-4">
-                      {project.tech.map(tag => (
-                        <span key={tag} className="tech-tag">{tag}</span>
-                      ))}
-                    </div>
-                    <div className="project-links mt-auto d-flex gap-2">
-                      <a href={project.liveLink} className="btn btn-project-primary w-100" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                      <a href={project.githubLink} className="btn btn-project-secondary w-100" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
+                    <div className="project-tech-stack mb-4">{project.tech.map(tag => (<span key={tag} className="tech-tag">{tag}</span>))}</div>
+                    <div className="project-links mt-auto d-flex gap-2"><a href={project.liveLink} className="btn btn-project-primary w-100" target="_blank" rel="noopener noreferrer">Live Demo</a><a href={project.githubLink} className="btn btn-project-secondary w-100" target="_blank" rel="noopener noreferrer">GitHub</a></div>
                   </div>
                 </div>
               </div>
@@ -515,34 +477,19 @@ function App() {
       <section id="testimonials" className="testimonial-multi-section py-5">
         <div className="container">
           <div className="row mb-5 justify-content-center text-center" data-aos="fade-up">
-            <div className="col-lg-8">
-                <p className="section-label text-uppercase fw-bold mb-2">Testimonials</p>
-                <h2 className="fw-bold mb-0 position-relative d-inline-block">
-                    What Our Clients Say
-                </h2>
-            </div>
+            <div className="col-lg-8"><p className="section-label text-uppercase fw-bold mb-2">Testimonials</p><h2 className="fw-bold mb-0 position-relative d-inline-block">What Our Clients Say</h2></div>
           </div>
           <div className="row g-4 justify-content-center">
             {testimonialsData.map((testimonial, index) => (
               <div className="col-lg-6 mb-4" key={testimonial.id} data-aos="fade-up" data-aos-delay={index * 100}>
                 <div className="testimonial-wrapper d-flex flex-column flex-sm-row align-items-center h-100">
-                    <div className="testimonial-image-container flex-shrink-0 mb-4 mb-sm-0 me-sm-4">
-                        {testimonial.image && <img src={testimonial.image} alt={testimonial.name} className="img-fluid rounded shadow-sm testimonial-client-img"/>}
-                    </div>
-                    <div className="testimonial-card p-4 rounded shadow-sm position-relative w-100 flex-grow-1">
-                        <div className="background-quotes display-1 position-absolute bottom-0 end-0" aria-hidden="true">
-                            <i className="bi bi-quote"></i>
-                        </div>
-                        <div className="rating-stars mb-3">
-                            {[...Array(testimonial.rating)].map((_, i) => (<i className="bi bi-star-fill" key={`star-fill-${testimonial.id}-${i}`}></i>))}
-                            {[...Array(5 - testimonial.rating)].map((_, i) => (<i className="bi bi-star" key={`star-empty-${testimonial.id}-${i}`}></i>))}
-                        </div>
-                        <p className="testimonial-text mb-4 position-relative">"{testimonial.review}"</p>
-                        <div className="testimonial-author position-relative">
-                            <h5 className="author-name fw-bold mb-1">{testimonial.name}</h5>
-                            <small className="author-details text-muted">{testimonial.location} | {testimonial.service}</small>
-                        </div>
-                    </div>
+                  <div className="testimonial-image-container flex-shrink-0 mb-4 mb-sm-0 me-sm-4">{testimonial.image && <img src={testimonial.image} alt={testimonial.name} className="img-fluid rounded shadow-sm testimonial-client-img"/>}</div>
+                  <div className="testimonial-card p-4 rounded shadow-sm position-relative w-100 flex-grow-1">
+                    <div className="background-quotes display-1 position-absolute bottom-0 end-0" aria-hidden="true"><i className="bi bi-quote"></i></div>
+                    <div className="rating-stars mb-3">{[...Array(testimonial.rating)].map((_, i) => (<i className="bi bi-star-fill" key={`star-fill-${testimonial.id}-${i}`}></i>))}{[...Array(5 - testimonial.rating)].map((_, i) => (<i className="bi bi-star" key={`star-empty-${testimonial.id}-${i}`}></i>))}</div>
+                    <p className="testimonial-text mb-4 position-relative">"{testimonial.review}"</p>
+                    <div className="testimonial-author position-relative"><h5 className="author-name fw-bold mb-1">{testimonial.name}</h5><small className="author-details text-muted">{testimonial.location} | {testimonial.service}</small></div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -551,52 +498,22 @@ function App() {
       </section>
 
       <section id="why-me" className="why-me-section py-5">
-          <div className="container">
-              <div className="row align-items-center justify-content-center gy-5">
-                  <div className="col-lg-5 col-md-8" data-aos="fade-right">
-                      <div className="why-me-image-container text-center">
-                          <img src={aboutImage} alt="Why partner with me" className="img-fluid rounded shadow-lg"/>
-                      </div>
-                  </div>
-                  <div className="col-lg-6 offset-lg-1" data-aos-delay="100" data-aos="fade-left">
-                      <p className="vnm section-label text-uppercase fw-bold mb-2">The ZMW Advantage</p>
-                      <h2 className="fw-bold mb-4">More Than a Developer, A Partner in Your Success.</h2>
-                      <p className="text-muted mb-4">
-                          Choosing a developer is choosing a partner for your digital journey. I am committed to not just delivering a product, but to building a solution that drives real value for your business.
-                      </p>
-                      <div className="benefit-list mt-4">
-                          <div className="benefit-card d-flex align-items-start mb-3">
-                              <div className="benefit-icon flex-shrink-0 me-3">
-                                  <i className="bi bi-graph-up-arrow"></i>
-                              </div>
-                              <div>
-                                  <h5 className="fw-bold mb-1">Business-First Approach</h5>
-                                  <p className="text-muted mb-0">I focus on your business goals to ensure the final product delivers a real return on investment.</p>
-                              </div>
-                          </div>
-                          <div className="benefit-card d-flex align-items-start mb-3">
-                              <div className="benefit-icon flex-shrink-0 me-3">
-                                  <i className="bi bi-gem"></i>
-                              </div>
-                              <div>
-                                  <h5 className="fw-bold mb-1">Commitment to Quality</h5>
-                                  <p className="text-muted mb-0">From pixel-perfect design to clean, scalable code, I never compromise on quality.</p>
-                              </div>
-                          </div>
-                          <div className="benefit-card d-flex align-items-start">
-                              <div className="benefit-icon flex-shrink-0 me-3">
-                                  <i className="bi bi-headset"></i>
-                              </div>
-                              <div>
-                                  <h5 className="fw-bold mb-1">Transparent & Supportive</h5>
-                                  <p className="text-muted mb-0">You'll get clear, consistent communication and dedicated support throughout our partnership.</p>
-                              </div>
-                          </div>
-                      </div>
-                       <a href="#contact" className="btn btn-primary mt-4">Let's Build Together</a>
-                  </div>
+        <div className="container">
+          <div className="row align-items-center justify-content-center gy-5">
+            <div className="col-lg-5 col-md-8" data-aos="fade-right"><div className="why-me-image-container text-center"><img src={aboutImage} alt="Why partner with me" className="img-fluid rounded shadow-lg"/></div></div>
+            <div className="col-lg-6 offset-lg-1" data-aos-delay="100" data-aos="fade-left">
+              <p className="vnm section-label text-uppercase fw-bold mb-2">The ZMW Advantage</p>
+              <h2 className="fw-bold mb-4">More Than a Developer, A Partner in Your Success.</h2>
+              <p className="text-muted mb-4">Choosing a developer is choosing a partner for your digital journey. I am committed to not just delivering a product, but to building a solution that drives real value for your business.</p>
+              <div className="benefit-list mt-4">
+                <div className="benefit-card d-flex align-items-start mb-3"><div className="benefit-icon flex-shrink-0 me-3"><i className="bi bi-graph-up-arrow"></i></div><div><h5 className="fw-bold mb-1">Business-First Approach</h5><p className="text-muted mb-0">I focus on your business goals to ensure the final product delivers a real return on investment.</p></div></div>
+                <div className="benefit-card d-flex align-items-start mb-3"><div className="benefit-icon flex-shrink-0 me-3"><i className="bi bi-gem"></i></div><div><h5 className="fw-bold mb-1">Commitment to Quality</h5><p className="text-muted mb-0">From pixel-perfect design to clean, scalable code, I never compromise on quality.</p></div></div>
+                <div className="benefit-card d-flex align-items-start"><div className="benefit-icon flex-shrink-0 me-3"><i className="bi bi-headset"></i></div><div><h5 className="fw-bold mb-1">Transparent & Supportive</h5><p className="text-muted mb-0">You'll get clear, consistent communication and dedicated support throughout our partnership.</p></div></div>
               </div>
+              <a href="#contact" className="btn btn-primary mt-4">Let's Build Together</a>
+            </div>
           </div>
+        </div>
       </section>
 
       <section id="news" className="news-section py-5">
@@ -604,55 +521,17 @@ function App() {
           <div className="row mb-4 mb-lg-5" data-aos="fade-up">
             <div className="col-12 text-center text-lg-start">
               <div className="row">
-                <div className="col-12">
-                  <p className="news-label-text text-uppercase fw-bold mb-1">News & Insights</p>
-                  <h2 className="news-main-headline fw-bolder display-5">
-                    Exploring the Forefront of
-                    <br className="d-none d-md-block" />
-                    Modern Web Development
-                  </h2>
-                </div>
+                <div className="col-12"><p className="news-label-text text-uppercase fw-bold mb-1">News & Insights</p><h2 className="news-main-headline fw-bolder display-5">Exploring the Forefront of<br className="d-none d-md-block" />Modern Web Development</h2></div>
               </div>
             </div>
           </div>
           <div className="row g-4 justify-content-center">
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-              <div className="news-card h-100">
-                <a href="#post-link-1" className="text-decoration-none d-block">
-                  <img src={news1} alt="AI assisting in web development" className="news-card-img img-fluid" />
-                  <div className="news-card-body">
-                    <p className="news-card-meta text-muted mb-1">August 28, 2024 <span className="mx-1">•</span> Future of Code</p>
-                    <h5 className="news-card-title fw-bold mb-0">How AI is Becoming the Developer's Most Powerful Co-Pilot</h5>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <div className="news-card h-100">
-                <a href="#post-link-2" className="text-decoration-none d-block">
-                  <img src={news2} alt="WebAssembly performance chart" className="news-card-img img-fluid" />
-                  <div className="news-card-body">
-                    <p className="news-card-meta text-muted mb-1">July 19, 2024 <span className="mx-1">•</span> Performance</p>
-                    <h5 className="news-card-title fw-bold mb-0">WebAssembly: Unlocking Near-Native Speed for Complex Web Apps</h5>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-              <div className="news-card h-100">
-                <a href="#post-link-3" className="text-decoration-none d-block">
-                  <img src={news3} alt="Progressive Web App on a mobile device" className="news-card-img img-fluid" />
-                  <div className="news-card-body">
-                    <p className="news-card-meta text-muted mb-1">June 05, 2024 <span className="mx-1">•</span> UI/UX Trends</p>
-                    <h5 className="news-card-title fw-bold mb-0">The Rise of the 'App-like' Web: PWAs Redefining User Experience</h5>
-                  </div>
-                </a>
-              </div>
-            </div> 
+            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"><div className="news-card h-100"><a href="#post-link-1" className="text-decoration-none d-block"><img src={news1} alt="AI assisting in web development" className="news-card-img img-fluid" /><div className="news-card-body"><p className="news-card-meta text-muted mb-1">August 28, 2024 <span className="mx-1">•</span> Future of Code</p><h5 className="news-card-title fw-bold mb-0">How AI is Becoming the Developer's Most Powerful Co-Pilot</h5></div></a></div></div>
+            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200"><div className="news-card h-100"><a href="#post-link-2" className="text-decoration-none d-block"><img src={news2} alt="WebAssembly performance chart" className="news-card-img img-fluid" /><div className="news-card-body"><p className="news-card-meta text-muted mb-1">July 19, 2024 <span className="mx-1">•</span> Performance</p><h5 className="news-card-title fw-bold mb-0">WebAssembly: Unlocking Near-Native Speed for Complex Web Apps</h5></div></a></div></div>
+            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300"><div className="news-card h-100"><a href="#post-link-3" className="text-decoration-none d-block"><img src={news3} alt="Progressive Web App on a mobile device" className="news-card-img img-fluid" /><div className="news-card-body"><p className="news-card-meta text-muted mb-1">June 05, 2024 <span className="mx-1">•</span> UI/UX Trends</p><h5 className="news-card-title fw-bold mb-0">The Rise of the 'App-like' Web: PWAs Redefining User Experience</h5></div></a></div></div>
           </div>
         </div>
       </section>
-
 
       <section id="contact" className="contact-section py-5">
         <div className="container">
@@ -670,15 +549,16 @@ function App() {
           <div className="row g-5">
             <div className="col-lg-7" data-aos="fade-right">
               <div className="contact-form-area p-4 p-md-5 rounded shadow-sm">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="row g-3">
-                    <div className="col-md-6"><input type="text" className="form-control custom-form-control" placeholder="Your Name" required/></div>
-                    <div className="col-md-6"><input type="email" className="form-control custom-form-control" placeholder="Your Email" required/></div>
-                    <div className="col-12"><input type="text" className="form-control custom-form-control" placeholder="Subject" required/></div>
-                    <div className="col-12"><textarea className="form-control custom-form-control" rows="6" placeholder="Your Message" required></textarea></div>
+                    <div className="col-md-6"><input type="text" name="name" value={formData.name} onChange={handleInputChange} className="form-control custom-form-control" placeholder="Your Name" required/></div>
+                    <div className="col-md-6"><input type="email" name="email" value={formData.email} onChange={handleInputChange} className="form-control custom-form-control" placeholder="Your Email" required/></div>
+                    <div className="col-12"><input type="text" name="subject" value={formData.subject} onChange={handleInputChange} className="form-control custom-form-control" placeholder="Subject" required/></div>
+                    <div className="col-12"><textarea name="message" value={formData.message} onChange={handleInputChange} className="form-control custom-form-control" rows="6" placeholder="Your Message" required></textarea></div>
                     <div className="col-12"><button type="submit" className="btn btn-send-message rounded-pill fw-medium">Send Message</button></div>
                   </div>
                 </form>
+                {result && <div className="form-result mt-3 text-center">{result}</div>}
               </div>
             </div>
             <div className="col-lg-5" data-aos="fade-left">
@@ -699,7 +579,6 @@ function App() {
         </div>
       </section>
 
-      {/* === FOOTER AAPKE CODE MEIN PEHLE SE THA, YAHAN BILKUL WAISE HI HAI === */}
       <footer className="site-footer" data-aos="fade-up">
           <div className="container">
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">

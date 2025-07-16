@@ -17,11 +17,9 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #f8f9fa;
   color: #495057;
-  /* overflow-x: hidden; <<< YEH HATA DIYA GAYA HAI */
 }
 
 .App-wrapper {
-  /* Yeh poori application ko wrap karega aur horizontal overflow ko roke ga */
   overflow-x: clip;
 }
 
@@ -127,6 +125,8 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  padding-top: 100px; /* Added padding for mobile view */
+  padding-bottom: 60px;
 }
 .text-image-clip {
   color: #444;
@@ -137,10 +137,12 @@ h1, h2, h3, h4, h5, h6 {
 .text-image-clip span.highlight-developer {
   color: #bf652e;
 }
-.software-text {
-  border-right: 1px solid #dee2e6;
-  padding-right: 1rem;
+.software-text-responsive {
   line-height: 1.2;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dee2e6;
 }
 .skill-icons {
   flex-wrap: wrap;
@@ -173,16 +175,14 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   min-height: 450px;
 }
-
-/* ===> BLOB FIX <=== */
 .blob {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%; /* Changed from 90vw. Yeh parent ke hisab se width lega. */
+  width: 100%;
   height: 0;
-  padding-bottom: 100%; /* Keeps the element square */
-  max-width: 500px; /* Badi screens par max 500px hoga. */
+  padding-bottom: 100%;
+  max-width: 500px;
   max-height: 500px;
   background: linear-gradient(135deg, #fca55e, #ff8c42);
   z-index: 1;
@@ -190,7 +190,6 @@ h1, h2, h3, h4, h5, h6 {
   transform: translate(-50%, -50%);
   overflow: hidden;
 }
-
 @keyframes morph {
   0%, 100% {
     border-radius: 60% 40% 30% 70% / 70% 30% 70% 40%;
@@ -206,27 +205,38 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 2;
   width: 80%;
   max-width: 380px;
-  height: 380px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* --- General Section Label --- */
-.section-label {
+.section-label, .vnm, .services-label, .portfolio-label, .news-label-text, .contact-label {
   color: var(--primary-color);
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
-  margin-left: 24px;
 }
-.vnm {
+
+
+
+.section-labelwe{
+
   color: var(--primary-color);
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
-  margin-left: 3px;
+  margin-left: 25px;
 }
+
+
+
+
+
+
+
 
 /* --- About Section --- */
 .about-section {
@@ -241,13 +251,11 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 500px;
   object-fit: cover;
 }
-
-/* ===> EXPERIENCE BADGE FIX <=== */
 .experience-badge {
   width: 140px;
   height: 140px;
   bottom: 20px;
-  right: 10px; /* Changed from -30px. Is se yeh container ke andar rahega. */
+  right: 10px;
   z-index: 10;
   position: absolute;
 }
@@ -287,13 +295,9 @@ h1, h2, h3, h4, h5, h6 {
 .marquee-item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 1.1rem; font-weight: 500; color: #495057; flex-shrink: 0; }
 .marquee-item i.bi-star-fill { color: var(--primary-color); margin-right: 0.75rem; font-size: 0.9rem; opacity: 0.8; }
 
-
 /* --- Services Section --- */
 .services-section {
   background-color: var(--section-bg-light);
-}
-.services-label {
-  color: var(--primary-color);
 }
 .skill-item .progress {
   background-color: #e9ecef;
@@ -382,9 +386,26 @@ h1, h2, h3, h4, h5, h6 {
 .why-me-section { background-color: var(--section-bg-light); }
 .benefit-icon { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%; background-color: rgba(243, 156, 18, 0.1); color: #f39c12; font-size: 1.5rem; }
 
+
+
+/* === YE CODE APP.CSS MEIN ADD KAREIN === */
+
+/* PHP icon ke liye color */
+.php-icon i {
+  color: #777BB4;
+}
+
+/* Python icon ke liye color */
+.python-icon i {
+  color: #3776AB;
+}
+
+
+
+
+
 /* --- News Section --- */
 .news-section { background-color: #fff; }
-.news-label-text { color: var(--primary-color); }
 .news-card { background-color: #fff; transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; border: 1px solid var(--border-color); }
 .news-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important; }
 .news-card a { position: relative; display: block; text-decoration: none; }
@@ -399,7 +420,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Contact Section --- */
 .contact-section { background-color: var(--section-bg-light); }
-.contact-label { color: var(--primary-color); }
 .contact-item-icon { display: flex; align-items: center; justify-content: center; width: 65px; height: 65px; background-color: #fff; border: 1px solid #eee; border-radius: 50%; box-shadow: 0 3px 8px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
 .contact-item-icon i { font-size: 1.8rem; color: var(--primary-color); }
 .contact-item-text:hover .contact-item-icon { transform: scale(1.1); }
@@ -418,6 +438,30 @@ h1, h2, h3, h4, h5, h6 {
 .site-footer { background-color: #212529; color: rgba(255, 255, 255, 0.75); padding: 1.5rem 0; }
 .social-icons .social-icon-link { color: rgba(255, 255, 255, 0.75); text-decoration: none; font-size: 1.2rem; transition: color 0.3s ease, transform 0.2s ease; }
 .social-icons .social-icon-link:hover { color: #fff; transform: scale(1.2); }
+/* === FOOTER SPACE FIX FOR MOBILE === */
+.App-wrapper {
+  overflow-x: clip;
+  /* Yeh nai line footer ke neeche ki extra space ko khatam karegi */
+  padding-bottom: 1px; 
+}
+
+.site-footer {
+  /* Is se footer hamesha neeche rahega */
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 576px) {
+  /* Badi screens par padding ki zaroorat nahi hai */
+  .App-wrapper {
+    padding-bottom: 0;
+  }
+}
+
+
+
+
+
 
 /* --- Floating Icons & Theme Toggle --- */
 .floating-icon { position: fixed; color: #fff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 5px 15px rgba(0,0,0,0.25); cursor: pointer; z-index: 1000; transition: all 0.3s ease; text-decoration: none; animation: pulse-in 0.8s ease-out 0.5s backwards; }
@@ -500,17 +544,23 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 .dark-mode .skill-card-tech:hover { border-color: var(--primary-color); background-color: rgba(58, 58, 58, 0.7); }
 .dark-mode .skill-card-tech .tech-name { color: #e0e0e0; }
 
-
 /* --- Responsive Styles --- */
+@media (min-width: 992px) {
+  .software-text-responsive {
+    width: auto;
+    padding-bottom: 0;
+    border-bottom: 0;
+    padding-right: 1.5rem;
+    border-right: 1px solid #dee2e6;
+  }
+}
+
 @media (max-width: 991.98px) {
   section { padding-top: 60px; padding-bottom: 60px; }
   h1.display-4 { font-size: 2.5rem; }
   h2, .h2 { font-size: 1.75rem; }
   .navbar-collapse { background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); border-radius: 0.5rem; padding: 1rem; margin-top: 0.5rem; }
-  .hero-section { min-height: auto; text-align: center; padding-top: 120px; }
-  .hero-section .text-lg-start, .about-section .text-lg-start, .services-section .col-lg-6, .why-me-section .text-lg-start { text-align: center !important; margin-left: 30px;}
-  .hero-section .justify-content-lg-start { justify-content: center !important; }
-  .hero-section .image-container, .about-image-container { margin-top: 40px; }
+  .hero-section { min-height: auto; }
   .experience-badge { position: relative !important; right: auto !important; bottom: auto !important; margin: -60px auto 0 auto !important; width: 120px !important; height: 120px !important; }
   .experience-badge .years { font-size: 2.8rem !important; }
   .signature-image { margin-left: auto; margin-right: auto; }
@@ -519,10 +569,6 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 
 @media (max-width: 767.98px) {
   h1.display-4 { font-size: 2.1rem; line-height: 1.3; }
-  .logo-main-text { font-size: 1.8rem; }
-  .logo-sub-text { font-size: 0.4rem; }
-  .hero-section .d-flex.align-items-center { flex-direction: column; }
-  .software-text { border-right: none; border-bottom: 1px solid #dee2e6; padding-right: 0; padding-bottom: 1rem; margin-bottom: 1rem; margin-right: 0 !important; width: 100%; text-align: center; }
   .testimonial-wrapper { flex-direction: column !important; text-align: center; }
   .testimonial-image-container { margin-right: 0 !important; margin-bottom: 1rem !important; }
   .testimonial-card { text-align: left; }
@@ -533,79 +579,6 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 @media (max-width: 575.98px) {
   .floating-icons-group { right: 20px; bottom: 20px; }
   .settings-icon { right: 20px; }
-  .hero-section .profile-image { width: 70%; height: auto; }
+  .hero-section .profile-image { width: 70%; }
   .blob { width: 85%; }
-
-
-
-  }
-
-/* === Technical Skills Section Styles === */
-.technical-skills-section {
-  background-color: var(--section-bg-light);
-  /* Light mode mein halka sa gradient feel */
-  background-image: linear-gradient(180deg, #ffffff, #f8f9fa);
 }
-
-.skill-card-tech {
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1 / 1; /* Card ko hamesha square rakhega */
-}
-
-.skill-card-tech:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08), 0 0 20px rgba(217, 132, 58, 0.3);
-  border-color: var(--primary-color);
-}
-
-.skill-card-tech .tech-icon {
-  font-size: 3.5rem; /* Icon ka size */
-  color: var(--primary-color);
-  transition: transform 0.3s ease;
-}
-
-.skill-card-tech:hover .tech-icon {
-  transform: scale(1.1);
-}
-
-.skill-card-tech .tech-name {
-  font-size: 0.95rem;
-  color: #343a40;
-}
-
-/* === Dark Mode ke liye Styles === */
-.dark-mode .technical-skills-section {
-  /* Dark mode mein dark purple gradient, jaisa image mein tha */
-  background-image: linear-gradient(160deg, #2c2538 0%, #181818 100%);
-  border-top: 1px solid var(--border-color-dark);
-  border-bottom: 1px solid var(--border-color-dark);
-}
-
-.dark-mode .skill-card-tech {
-  background-color: rgba(42, 42, 42, 0.7); 
-  border-color: var(--border-color-dark);
-  backdrop-filter: blur(5px); /* Card ke peeche halka sa blur effect */
-}
-
-.dark-mode .skill-card-tech:hover {
-  border-color: var(--primary-color);
-  background-color: rgba(58, 58, 58, 0.7);
-}
-
-.dark-mode .skill-card-tech .tech-name {
-  color: #e0e0e0;
-}
-
-/* Skills Marquee Section */
-.skills-marquee-section { background-color: #fff; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-.marquee-container { overflow: hidden; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
-.marquee-content { display: flex; white-space: nowrap; will-change: transform; animation: scroll-left 25s linear infinite; }
-.marquee-container:hover .marquee-content { animation-play-state: paused; }
-@keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 1.1rem; font-weight: 500; color: #495057; flex-shrink: 0; }
-.marquee-item i.bi-star-fill { color: var(--primary-color); margin-right: 0.75rem; font-size: 0.9rem; opacity: 0.8; }

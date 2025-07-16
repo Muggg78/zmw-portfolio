@@ -2,7 +2,7 @@
   "name": "myself",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Muggg78.github.io/zmw-portfolio/",
+  "homepage": "https://Muggg78.github.io/zmw-portfolio",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
@@ -19,14 +19,13 @@
     "web-vitals": "^5.0.3"
   },
   "scripts": {
-  "start": "react-scripts start",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -b gh-pages -d build", 
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
-  
+    "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

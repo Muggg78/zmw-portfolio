@@ -218,6 +218,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
+  margin-left: 24px;
 }
 .vnm {
   color: var(--primary-color);
@@ -507,7 +508,7 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
   h2, .h2 { font-size: 1.75rem; }
   .navbar-collapse { background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); border-radius: 0.5rem; padding: 1rem; margin-top: 0.5rem; }
   .hero-section { min-height: auto; text-align: center; padding-top: 120px; }
-  .hero-section .text-lg-start, .about-section .text-lg-start, .services-section .col-lg-6, .why-me-section .text-lg-start { text-align: center !important; }
+  .hero-section .text-lg-start, .about-section .text-lg-start, .services-section .col-lg-6, .why-me-section .text-lg-start { text-align: center !important; margin-left: 30px;}
   .hero-section .justify-content-lg-start { justify-content: center !important; }
   .hero-section .image-container, .about-image-container { margin-top: 40px; }
   .experience-badge { position: relative !important; right: auto !important; bottom: auto !important; margin: -60px auto 0 auto !important; width: 120px !important; height: 120px !important; }
@@ -534,14 +535,10 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
   .settings-icon { right: 20px; }
   .hero-section .profile-image { width: 70%; height: auto; }
   .blob { width: 85%; }
-<<<<<<< HEAD
-}
-=======
-}
 
 
 
-/* src/App.css (ye code file ke aakhir mein daalein) */
+  }
 
 /* === Technical Skills Section Styles === */
 .technical-skills-section {
@@ -604,13 +601,6 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
   color: #e0e0e0;
 }
 
-
-
-
-
-
-
-
 /* Skills Marquee Section */
 .skills-marquee-section { background-color: #fff; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
 .marquee-container { overflow: hidden; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
@@ -619,4 +609,3 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 @keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 1.1rem; font-weight: 500; color: #495057; flex-shrink: 0; }
 .marquee-item i.bi-star-fill { color: var(--primary-color); margin-right: 0.75rem; font-size: 0.9rem; opacity: 0.8; }
->>>>>>> 38af4cc5459b559fa3657cd34038d20bce48d835

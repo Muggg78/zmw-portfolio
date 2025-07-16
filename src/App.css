@@ -12,13 +12,18 @@
   --text-muted-dark: #adb5bd;
 }
 
+/* === BODY AUR GLOBAL FIXES === */
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #f8f9fa;
   color: #495057;
-  overflow-x: hidden; /* Yeh bhi rakhna ahtiyat ke liye theek hai */
+  /* overflow-x: hidden; <<< YEH HATA DIYA GAYA HAI */
 }
 
+.App-wrapper {
+  /* Yeh poori application ko wrap karega aur horizontal overflow ko roke ga */
+  overflow-x: clip;
+}
 
 img {
   max-width: 100%;
@@ -48,32 +53,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes navbarPulse {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.02); }
+  0% { transform: scale(1); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 5px rgba(255, 140, 66, 0.3); }
+  50% { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 140, 66, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 5px rgba(255, 140, 66, 0.3); }
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@keyframes navbarPulse {
-  0% {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 5px rgba(255, 140, 66, 0.3);
-  }
-  50% {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 140, 66, 0.7);
-  }
-  100% {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 5px rgba(255, 140, 66, 0.3);
-  }
-}
 .navbar-brand.logo-text-brand {
   padding-top: 0.2rem;
   padding-bottom: 0.15rem;
@@ -178,18 +162,10 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
-.html5-icon i {
-  color: #e44d26;
-}
-.css3-icon i {
-  color: #264de4;
-}
-.js-icon i {
-  color: #f0db4f;
-}
-.bootstrap-icon i {
-  color: #7952b3;
-}
+.html5-icon i { color: #e44d26; }
+.css3-icon i { color: #264de4; }
+.js-icon i { color: #f0db4f; }
+.bootstrap-icon i { color: #7952b3; }
 .image-container {
   position: relative;
   display: flex;
@@ -198,15 +174,15 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 450px;
 }
 
-/* ===> CHANGE #1 STARTS HERE <=== */
+/* ===> BLOB FIX <=== */
 .blob {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%; /* Changed from 90vw to 100% to prevent overflow */
+  width: 100%; /* Changed from 90vw. Yeh parent ke hisab se width lega. */
   height: 0;
   padding-bottom: 100%; /* Keeps the element square */
-  max-width: 500px;
+  max-width: 500px; /* Badi screens par max 500px hoga. */
   max-height: 500px;
   background: linear-gradient(135deg, #fca55e, #ff8c42);
   z-index: 1;
@@ -214,11 +190,9 @@ h1, h2, h3, h4, h5, h6 {
   transform: translate(-50%, -50%);
   overflow: hidden;
 }
-/* ===> CHANGE #1 ENDS HERE <=== */
 
 @keyframes morph {
-  0%,
-  100% {
+  0%, 100% {
     border-radius: 60% 40% 30% 70% / 70% 30% 70% 40%;
     transform: translate(-50%, -50%) rotate(0deg);
   }
@@ -239,17 +213,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- General Section Label --- */
-/* ===> CHANGE #2 STARTS HERE <=== */
 .section-label {
   color: var(--primary-color);
   font-size: 0.9rem;
   letter-spacing: 1px;
   margin-bottom: 0.5rem;
-  padding-left: 15px; /* Changed from margin-left to padding-left */
-  padding-right: 15px; /* Added for safety */
 }
-/* ===> CHANGE #2 ENDS HERE <=== */
-
 .vnm {
   color: var(--primary-color);
   font-size: 0.9rem;
@@ -271,11 +240,13 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 500px;
   object-fit: cover;
 }
+
+/* ===> EXPERIENCE BADGE FIX <=== */
 .experience-badge {
   width: 140px;
   height: 140px;
   bottom: 20px;
-  right: -30px;
+  right: 10px; /* Changed from -30px. Is se yeh container ke andar rahega. */
   z-index: 10;
   position: absolute;
 }
@@ -305,6 +276,16 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 200px;
   height: auto;
 }
+
+/* --- Skills Marquee Section --- */
+.skills-marquee-section { background-color: #fff; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+.marquee-container { overflow: hidden; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+.marquee-content { display: flex; white-space: nowrap; will-change: transform; animation: scroll-left 15s linear infinite; }
+.marquee-container:hover .marquee-content { animation-play-state: paused; }
+@keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 1.1rem; font-weight: 500; color: #495057; flex-shrink: 0; }
+.marquee-item i.bi-star-fill { color: var(--primary-color); margin-right: 0.75rem; font-size: 0.9rem; opacity: 0.8; }
+
 
 /* --- Services Section --- */
 .services-section {
@@ -451,6 +432,38 @@ h1, h2, h3, h4, h5, h6 {
 .theme-option-btn:hover { background-color: #f0f0f0; }
 .theme-option-btn.active { background-color: var(--primary-color); color: #fff; }
 
+/* === Technical Skills Section Styles === */
+.technical-skills-section {
+  background-color: var(--section-bg-light);
+  background-image: linear-gradient(180deg, #ffffff, #f8f9fa);
+}
+.skill-card-tech {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.skill-card-tech:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08), 0 0 20px rgba(217, 132, 58, 0.3);
+  border-color: var(--primary-color);
+}
+.skill-card-tech .tech-icon {
+  font-size: 3.5rem;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+.skill-card-tech:hover .tech-icon {
+  transform: scale(1.1);
+}
+.skill-card-tech .tech-name {
+  font-size: 0.95rem;
+  color: #343a40;
+}
+
 /* Dark Mode Styles */
 body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 { color: #f5f5f5; }
@@ -481,6 +494,10 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
 .dark-mode .btn-project-secondary { color: var(--text-muted-dark); border-color: var(--border-color-dark); }
 .dark-mode .btn-project-secondary:hover { background-color: #3a3a3a; color: #fff; border-color: #3a3a3a; }
 .dark-mode .marquee-item { color: var(--text-muted-dark); }
+.dark-mode .technical-skills-section { background-image: linear-gradient(160deg, #2c2538 0%, #181818 100%); border-top: 1px solid var(--border-color-dark); border-bottom: 1px solid var(--border-color-dark); }
+.dark-mode .skill-card-tech { background-color: rgba(42, 42, 42, 0.7); border-color: var(--border-color-dark); backdrop-filter: blur(5px); }
+.dark-mode .skill-card-tech:hover { border-color: var(--primary-color); background-color: rgba(58, 58, 58, 0.7); }
+.dark-mode .skill-card-tech .tech-name { color: #e0e0e0; }
 
 
 /* --- Responsive Styles --- */
@@ -497,19 +514,13 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
   .experience-badge .years { font-size: 2.8rem !important; }
   .signature-image { margin-left: auto; margin-right: auto; }
   .skills-wrapper { max-width: 500px; margin-left: auto; margin-right: auto; text-align: left; }
-  /* ===> CHANGE #2 (Mobile Part) STARTS HERE <=== */
-  .section-label {
-    padding-left: 0; /* Removing extra padding on mobile */
-    padding-right: 0;
-  }
-  /* ===> CHANGE #2 (Mobile Part) ENDS HERE <=== */
 }
 
 @media (max-width: 767.98px) {
   h1.display-4 { font-size: 2.1rem; line-height: 1.3; }
   .logo-main-text { font-size: 1.8rem; }
   .logo-sub-text { font-size: 0.4rem; }
-  .d-flex.align-items-center { flex-direction: column; }
+  .hero-section .d-flex.align-items-center { flex-direction: column; }
   .software-text { border-right: none; border-bottom: 1px solid #dee2e6; padding-right: 0; padding-bottom: 1rem; margin-bottom: 1rem; margin-right: 0 !important; width: 100%; text-align: center; }
   .testimonial-wrapper { flex-direction: column !important; text-align: center; }
   .testimonial-image-container { margin-right: 0 !important; margin-bottom: 1rem !important; }
@@ -524,84 +535,3 @@ body.dark-mode { background-color: var(--color-black); color: #e0e0e0; }
   .hero-section .profile-image { width: 70%; height: auto; }
   .blob { width: 85%; }
 }
-
-
-
-/* src/App.css (ye code file ke aakhir mein daalein) */
-
-/* === Technical Skills Section Styles === */
-.technical-skills-section {
-  background-color: var(--section-bg-light);
-  /* Light mode mein halka sa gradient feel */
-  background-image: linear-gradient(180deg, #ffffff, #f8f9fa);
-}
-
-.skill-card-tech {
-  background-color: #fff;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1 / 1; /* Card ko hamesha square rakhega */
-}
-
-.skill-card-tech:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08), 0 0 20px rgba(217, 132, 58, 0.3);
-  border-color: var(--primary-color);
-}
-
-.skill-card-tech .tech-icon {
-  font-size: 3.5rem; /* Icon ka size */
-  color: var(--primary-color);
-  transition: transform 0.3s ease;
-}
-
-.skill-card-tech:hover .tech-icon {
-  transform: scale(1.1);
-}
-
-.skill-card-tech .tech-name {
-  font-size: 0.95rem;
-  color: #343a40;
-}
-
-/* === Dark Mode ke liye Styles === */
-.dark-mode .technical-skills-section {
-  /* Dark mode mein dark purple gradient, jaisa image mein tha */
-  background-image: linear-gradient(160deg, #2c2538 0%, #181818 100%);
-  border-top: 1px solid var(--border-color-dark);
-  border-bottom: 1px solid var(--border-color-dark);
-}
-
-.dark-mode .skill-card-tech {
-  background-color: rgba(42, 42, 42, 0.7); 
-  border-color: var(--border-color-dark);
-  backdrop-filter: blur(5px); /* Card ke peeche halka sa blur effect */
-}
-
-.dark-mode .skill-card-tech:hover {
-  border-color: var(--primary-color);
-  background-color: rgba(58, 58, 58, 0.7);
-}
-
-.dark-mode .skill-card-tech .tech-name {
-  color: #e0e0e0;
-}
-
-
-
-
-
-
-
-
-/* Skills Marquee Section */
-.skills-marquee-section { background-color: #fff; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
-.marquee-container { overflow: hidden; position: relative; width: 100%; -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
-.marquee-content { display: flex; white-space: nowrap; will-change: transform; animation: scroll-left 15s linear infinite; }
-.marquee-container:hover .marquee-content { animation-play-state: paused; }
-@keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 1.1rem; font-weight: 500; color: #495057; flex-shrink: 0; }
-.marquee-item i.bi-star-fill { color: var(--primary-color); margin-right: 0.75rem; font-size: 0.9rem; opacity: 0.8; }
